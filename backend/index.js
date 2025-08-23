@@ -1,10 +1,11 @@
-import app from '/server.js'
+import app from './server.js'
 import mongodb from "mongodb"
 import dotenv from "dotenv"
-import MoviesDao from '.dao/moviesDAO.js'
+import MoviesDao from './dao/moviesDao.js'
 
 async function main() {
     dotenv.config()
+    console.log("DB URI:", process.env.MOVIEREVIEWS_DB_URI)
     const client = new mongodb.MongoClient(
         process.env.MOVIEREVIEWS_DB_URI
     )
