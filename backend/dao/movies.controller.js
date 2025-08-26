@@ -1,4 +1,4 @@
-import MoviesDAO from "./moviesDao";
+import MoviesDAO from "../dao/moviesDao.js";
 
 export default class MovieController{
     static async apiGetMovies(req, res, next){
@@ -15,6 +15,7 @@ export default class MovieController{
             page,
             moviesPerPage
         })
+        console.log('you are here')
         let response = {
             movies: moviesList,
             page: page,

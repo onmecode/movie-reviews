@@ -10,6 +10,7 @@ async function main() {
         process.env.MOVIEREVIEWS_DB_URI
     )
     const port = process.env.PORT || 8000
+    console.log(port)
 
 try {
 
