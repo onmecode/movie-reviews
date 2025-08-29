@@ -1,8 +1,10 @@
 import ReviewsDao from '../dao/reviewsDao.js'
 
 export default class ReviewsController{
+    
     static async apiPostReview(req, res, next){
         try{
+            console.log("you are inside the post controller")
             const movieId = req.body.movie_id
             const review = req.body.review
             const userInfo = {
@@ -18,7 +20,13 @@ export default class ReviewsController{
                 date
             )
 
-            res.json({ status: "success"})
+            res.json({ status: "success",
+                response_movie_id: ReviewResponse.movieId,
+                response_user_info: ReviewResponse.userInfo,
+                response_review: ReviewResponse.review,
+                review_date: ReviewResponse.date
+
+            })
         }catch(e){
             res.status(500).json({error: e.message})
         }
@@ -39,15 +47,15 @@ export default class ReviewsController{
             )
 
             var { error } = ReviewResponse
-            if(error){
-                res.status.json({error})
+            if (error) {
+                return res.status(400).json({ error });
             }
 
-            if(ReviewResponse.modifiedCount === 0){
-                throw new Error ("unable to update review. User may not be the original poster")
+            if (ReviewResponse.modifiedCount === 0) {
+                    return res.status(400).json({ error: "Unable to update review." });
             }
 
-            res.json({ status: "success"})
+             return res.json({ status: "success"})
         }catch(e){
             res.status(500).json({error: e.message})
         }
